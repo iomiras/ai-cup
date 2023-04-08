@@ -9,12 +9,12 @@ import Analytics from './components/Analytics/Analytics';
 import LoginSignupPage from './components/LoginSignupPage/LoginSignupPage';
 
 function App() {
-  const [showMyItems, setShowMyItems] = useState(false);
+  const [showMyItems, setShowMyItems] = useState(true);
   const [showAddItem, setShowAddItem] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false)
 
-  const [activeTab, setActiveTab] = useState('')
+  const [activeTab, setActiveTab] = useState('MyItems')
 
   const toggleMyItems = () => {
     setShowMyItems(!showMyItems);

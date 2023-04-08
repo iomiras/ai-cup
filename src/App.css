@@ -3,3 +3,11 @@
   overflow: hidden;
   text-overflow: clip;
 }
+
+.App {
+  background-color: #F1F2F3;
+  background-color: #F8F8F8;
+  min-height: 100vh;
+  height: auto;
+  width: auto;
+}

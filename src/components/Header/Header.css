@@ -1,3 +1,24 @@
+nav {
+    background-color: #f1f2f3
+}
+
+.title {
+    color: #F13F2C;
+    font-weight: 500;
+    font-size: x-large;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.title:hover {
+    color: #F13F2C;
+    cursor: default;
+}
+
+.nav-item {
+    font-size: medium;
+}
+
 a.disabled {
     pointer-events: none;
     text-decoration: underline;

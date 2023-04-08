@@ -21,4 +21,4 @@ function LoginSignupPage() {
     )
 }
 
-export default LoginSignupPage
+export default LoginSignupPage;
