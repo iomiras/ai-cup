@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SignupForm() {
+function SignupForm(props) {
     const [website, setWebsite] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -75,7 +75,10 @@ function SignupForm() {
                         <option value="portfolio">Portfolio</option>
                     </select>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <div className='row'>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <p className='mt-3'>Already have an account? <a href="#" onClick={props.handleFormTypeChange}>Log in</a></p>
+                </div>
             </form>
         </div>
     );

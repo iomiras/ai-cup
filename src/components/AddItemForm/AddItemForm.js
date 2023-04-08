@@ -10,7 +10,7 @@ function AddItemForm() {
                 </div>
                 <div className="form-floating mb-3">
                     <textarea className="form-control" placeholder="Description" id="description" style={{ height: '100px' }}></textarea>
-                    <label for="description">Description</label>
+                    <label htmlFor="description">Description</label>
                 </div>
                 <div className="d-grid gap-2">
                     <button className="btn btn-primary" type="button">Save</button>

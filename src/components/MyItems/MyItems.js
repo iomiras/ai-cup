@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './MyItems.css';
-import Modal from './Modal';
+import Modal from '../Modal/Modal';
 
 const MyItems = () => {
     const [items, setItems] = useState([

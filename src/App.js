@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from './components/Header';
-import AddItemForm from './components/AddItemForm';
-import MyItems from './components/MyItems';
-import Analytics from './components/Analytics';
-import SignUp from './components/SignUp';
+import Header from './components/Header/Header';
+import AddItemForm from './components/AddItemForm/AddItemForm';
+import MyItems from './components/MyItems/MyItems';
+import Analytics from './components/Analytics/Analytics';
+import LoginSignupPage from './components/LoginSignupPage/LoginSignupPage';
 
 function App() {
   const [showMyItems, setShowMyItems] = useState(false);
@@ -79,7 +79,7 @@ function App() {
       {showSignUp && (
         <div className="container">
           <div className="row">
-            <SignUp />
+            <LoginSignupPage />
           </div>
         </div>
       )}

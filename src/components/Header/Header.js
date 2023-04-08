@@ -7,7 +7,7 @@ function Header(props) {
     const isActiveAddItem = props.activeTab === "AddItem";
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary mb-3">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">Analytics AI</a>
 
