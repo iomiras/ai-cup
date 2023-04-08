@@ -19,7 +19,7 @@ function SignupForm() {
 
     return (
         <div>
-            <form className='w-50 p-5' onSubmit={handleSubmit}>
+            <form className='w-50' onSubmit={handleSubmit}>
                 <h3 className='mb-3'>Sign Up</h3>
                 <div className="mb-3">
                     <label htmlFor="website" className="form-label">Website</label>

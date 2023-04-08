@@ -62,7 +62,7 @@ const MyItems = () => {
                     </tr>
                 </thead>
 
-                <tbody className={showModal ? 'dark' : ''}>
+                <tbody>
                     {items.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
