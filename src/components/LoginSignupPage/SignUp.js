@@ -9,12 +9,33 @@ function SignupForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         console.log('Form submitted');
         console.log('Website:', website);
         console.log('Email:', email);
         console.log('Password:', password);
         console.log('Confirm password:', confirmPassword);
         console.log('Website category:', websiteCategory);
+
+        // Send POST request to register the user
+        fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                website: website,
+                website_category: websiteCategory
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('bearerToken', data.bearer_token);
+            })
+            .catch(error => console.error(error));
     };
 
     return (

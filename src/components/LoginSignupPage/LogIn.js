@@ -9,6 +9,20 @@ function LoginForm(props) {
         console.log('Form submitted');
         console.log('Email:', email);
         console.log('Password:', password);
+
+        fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
     };
 
     return (

@@ -1,48 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MyItems.css';
 import Modal from '../Modal/Modal';
 
 const MyItems = () => {
     const [items, setItems] = useState([
         {
-            name: 'Item 1',
-            token: 'abcdefgabcdefgabcdefgabcdefgabcdefg',
-            description: 'This is the description for Item 1',
-            editing: false,
-        },
-        {
-            name: 'Item 2',
-            token: 'hijklmn',
-            description: 'This is the description for Item 2',
-            editing: false,
-        },
-        {
-            name: 'Item 3',
-            token: 'opqrstu',
-            description: 'This is the description for Item 3',
-            editing: false,
+            name: '',
+            token: '',
+            description: '',
         },
     ]);
 
     const [showModal, setShowModal] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);
+    const [cohereAIResponse, setCohereAIResponse] = useState('');
 
-    const handleDescriptionChange = (event, index) => {
-        const newItems = [...items];
-        newItems[index].description = event.target.value;
-        newItems[index].editing = true;
-        setItems(newItems);
-    };
+    useEffect(() => {
+        const token = localStorage.getItem('bearerToken');
 
-    const handleSaveClick = (index) => {
-        const newItems = [...items];
-        newItems[index].editing = false;
-        setItems(newItems);
-    };
+        fetch('http://127.0.0.1:8000/api/buttons', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setItems(data);
+            })
+            .catch((error) => console.error(error));
+    }, []);
 
     const handleImproveClick = (item) => {
-        setShowModal(true);
-        setCurrentItem(item);
+        const token = localStorage.getItem('bearerToken');
+        setCurrentItem(item)
+        fetch(`/api/buttons/improve`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ token: item.token }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setShowModal(true);
+                setCohereAIResponse(data['generations']['text']);
+            })
+            .catch((error) => console.error(error));
     };
 
     const handleCloseModal = () => {
@@ -63,36 +67,18 @@ const MyItems = () => {
                 </thead>
 
                 <tbody className={showModal ? 'dark' : ''}>
-                    {items.map((item, index) => (
-                        <tr key={index}>
+                    {items.map((item, id) => (
+                        <tr key={id}>
                             <td>{item.name}</td>
-                            <td style={{ maxWidth: '150px' }}>{item.token}</td>
+                            <td>{item.token}</td>
                             <td>
-                                <textarea
-                                    type="text"
-                                    className="form-control"
-                                    value={item.description}
-                                    onChange={(event) => handleDescriptionChange(event, index)}
-                                    rows={item.editing ? 4 : 1}
-                                    onFocus={(event) => {
-                                        event.target.rows = 4;
-                                        handleDescriptionChange({ target: { value: item.description } }, index);
-                                    }}
-                                    onBlur={(event) => (event.target.rows = 1)}
-                                />
+                                <div>{item.description}</div>
                             </td>
 
                             <td>
-                                {item.editing ? (
-                                    <button className="btn btn-outline-success me-2" onClick={() => handleSaveClick(index)}>
-                                        Save
-                                    </button>
-                                ) : (
-                                    <button type='button' className="btn btn-primary me-2" onClick={() => handleImproveClick(item)}>
-                                        Improve
-                                    </button>
-                                )}
-
+                                <button type='button' className="btn btn-primary me-2" onClick={() => handleImproveClick(item)}>
+                                    Improve
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -100,8 +86,8 @@ const MyItems = () => {
             </table>
 
             {currentItem && (
-                <Modal showModal={showModal} closeModal={handleCloseModal} title={`${currentItem.name} improvement recommendations:`}>
-                    <p>Some improvement recommendations for {currentItem.name}</p>
+                <Modal showModal={showModal} closeModal={handleCloseModal} title={`${currentItem.name} improvement recommendations: `}>
+                    <p>{cohereAIResponse}</p>
                 </Modal>
             )}
         </div>

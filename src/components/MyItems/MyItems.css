@@ -3,14 +3,11 @@ thead {
 }
 
 td {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: auto;
+    /* text-overflow: ellipsis; */
+    white-space: initial;
     text-align: center;
-}
-
-textarea {
-    overflow: hidden;
+    max-width: 150px;
 }
 
 .table-body.dark {
