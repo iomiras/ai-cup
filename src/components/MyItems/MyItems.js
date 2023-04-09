@@ -3,13 +3,7 @@ import './MyItems.css';
 import Modal from '../Modal/Modal';
 
 const MyItems = () => {
-    const [items, setItems] = useState([
-        {
-            name: '',
-            token: '',
-            description: '',
-        },
-    ]);
+    const [items, setItems] = useState([]);
 
     const [showModal, setShowModal] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);

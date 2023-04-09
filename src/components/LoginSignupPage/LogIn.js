@@ -10,7 +10,7 @@ function LoginForm(props) {
         console.log('Email:', email);
         console.log('Password:', password);
 
-        fetch('/api/auth/login', {
+        fetch('http://127.0.0.1:8000/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +21,10 @@ function LoginForm(props) {
             })
         })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('bearerToken', data.token);
+            })
             .catch(error => console.error(error));
     };
 
